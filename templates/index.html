@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TNG Balance Checker</title>
+
+    <style>
+        h1 {
+            text-align: center;    
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <h1> Your Touch N Go Cards' Balance </h1>
+    <div id='form'>
+        <table style="width:100%">
+            <tr>
+                {% for title in titles %}
+                    <th>{{ title }}</th>
+                {% endfor %}
+            </tr>
+
+                    
+            {% for card in cards %}
+                <tr>
+                    <td> {{ card[0] }} </td>
+                    <td> {{ card[1] }} </td>
+                    <td> {{ card[2] }} </td>
+                    <td> {{ card[3] }} </td>
+                    <td> {{ card[4] }} </td>
+                    <td> {{ card[5] }} </td>
+                    <td> {{ card[6] }} </td>
+                </tr>
+            {% endfor %}
+           
+          </table>
+    </div>
+</body>
+</html>

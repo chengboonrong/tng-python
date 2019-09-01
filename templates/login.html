@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+</head>
+<body>
+    <form action="{{ url_for('login') }}" method="post">
+        username:<br>
+        <input type="text" name="username" value="">
+        <br>
+        password:<br>
+        <input type="text" name="password" value="">
+        <br><br>
+        <input type="submit" value="Login">
+    </form> 
+
+    {% with message = get_flashed_messages() %}
+    {% if message %}
+        <h2>{{ message[0] }}</h2>
+    {% endif %}
+    {% endwith %}
+</body>
+</html>
