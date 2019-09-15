@@ -1,48 +1,32 @@
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.options import Options
-from selenium.common.exceptions import NoSuchElementException
+from flask import Flask, render_template, request, url_for, redirect, flash
+from tng import login
 
-def run(user, pas):
-    options = Options()  
-    options.add_argument("--headless")
-    options.add_argument("--disable-gpu")
+titles = []
+cards = []
 
-    user=user
-    pas=pas
+app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-    driver = webdriver.Chrome(options=options)
-    driver.get('https://tngportal.touchngo.com.my/tngPortal/login')
-    # driver.save_screenshot('screen1.png')
+@app.route('/')
+def index():
+    return render_template('login.html')
 
-    elem = driver.find_element_by_name('j_username')
-    elem.send_keys(user)
-    elem = driver.find_element_by_name('j_password')
-    elem.send_keys(pas)
-    elem.send_keys(Keys.RETURN)
-    # driver.save_screenshot('screen2.png')
+@app.route('/login', methods=['POST'])
+def loginPage():
+    global titles, cards
 
-    titles = []
-    cards = []
+    user = request.form['username']
+    pas = request.form['password']
+    titles, cards = login(user, pas)
+    if not titles:
+        flash(u"Wrong username or password, please try again ... ")
+        return redirect(url_for('index'))
+    else:
+        return redirect(url_for('show'))
 
-    try:
-        table = driver.find_element_by_id('l_com_xerox_ts_domain_CardRegistration')
-       
-        theads = table.find_element_by_tag_name('thead').find_elements_by_tag_name('th')
-        for th in theads:
-            titles.append(th.text)
+@app.route('/balance')
+def show():
+    return render_template("index.html", titles=titles, cards=cards)
 
-        tbodys = table.find_element_by_tag_name('tbody').find_elements_by_tag_name('tr')
-        for tbody in tbodys:
-            card = []
-            for e in tbody.find_elements_by_tag_name('td'):
-                card.append(e.text)
-            
-            cards.append(card)
-
-    except NoSuchElementException:
-        print("Wrong username or password ... ")
-
-    driver.close()
-
-    return titles, cards
+if __name__ == '__main__':
+    app.run()

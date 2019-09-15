@@ -1,19 +1,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
+    <link rel="stylesheet" href="../static/main.css">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
 </head>
 <body>
-    <form action="{{ url_for('login') }}" method="post">
-        username:<br>
-        <input type="text" name="username" value="">
-        <br>
-        password:<br>
-        <input type="text" name="password" value="">
-        <br><br>
-        <input type="submit" value="Login">
+    <form class="pure-form" action="{{ url_for('loginPage') }}" method="post">
+        <fieldset>
+        <legend>TNG login form</legend>
+
+        <input name="username" type="text" placeholder="Username">
+        <input name="password" type="password" placeholder="Password">
+
+        <button type="submit" class="pure-button pure-button-primary">Sign in</button>
+        </fieldset>
     </form> 
 
     {% with message = get_flashed_messages() %}

@@ -1,0 +1,9 @@
+body {
+    text-align: center;
+    background-color: azure;
+    background-image: url('logo.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 300px 100px; 
+}
