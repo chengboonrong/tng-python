@@ -1,7 +1,8 @@
-"# tng-python" 
+# Alternative TNG cards' balance checker
 
-"# LINUX"
-export PATH="$PATH:~/tng-python/driver/"
+## Quick Start
+- Linux
+> export PATH="$PATH:~/tng-python/driver/"
 
-"# WINDOWNS"
-add new value ("..\tng-python\driver\") to Path variable under System Variables
+- Windows
+> add new value ("..\tng-python\driver\") to Path variable under System Variables
